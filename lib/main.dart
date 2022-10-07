@@ -4,6 +4,7 @@ import 'package:news_api/provider/newsbottomprovider.dart';
 import 'package:news_api/provider/provider.dart';
 import 'package:news_api/view/bottombar.dart';
 import 'package:news_api/view/firstscreen.dart';
+import 'package:news_api/view/secnews_Screen.dart';
 import 'package:news_api/view/tabbar.dart';
 import 'package:provider/provider.dart';
 
@@ -21,6 +22,7 @@ void main(){
             '/':(context)=>bottomber_Screen(),
             'tab':(context)=>api_tabbar(),
             'shoptwo':(context)=>newsApi_FirstScreen(),
+            'secode':(context)=>news_apisecode(),
           },
         ),
       )
