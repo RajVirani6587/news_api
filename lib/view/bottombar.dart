@@ -5,8 +5,6 @@ import 'package:news_api/provider/newsbottomprovider.dart';
 import 'package:news_api/view/tabbar.dart';
 import 'package:provider/provider.dart';
 
-
-
 class bottomber_Screen extends StatefulWidget {
   const bottomber_Screen({Key? key}) : super(key: key);
 

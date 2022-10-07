@@ -17,7 +17,6 @@ void main(){
         ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
-          initialRoute: 'shop',
           routes: {
             '/':(context)=>bottomber_Screen(),
             'tab':(context)=>api_tabbar(),

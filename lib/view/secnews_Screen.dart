@@ -41,36 +41,69 @@ class _news_apisecodeState extends State<news_apisecode> {
           ),
         ],
       ),
-      body: Column(
-         children: [
+      body: SingleChildScrollView(
+        child: Column(
+           children: [
 
-           Row(
-             mainAxisAlignment: MainAxisAlignment.center,
-             children: [
-               Container(margin: EdgeInsets.symmetric(vertical: 10),width: MediaQuery.of(context).size.width*0.9,child: Text("${apiproviderF!.Datapick!.title}",style: TextStyle(color: Colors.orange,fontWeight: FontWeight.bold),)),
-             ],
-           ),
-           Row(
-             mainAxisAlignment: MainAxisAlignment.center,
-             children: [
-               InkWell(onTap: (){},
-                 child: ClipRRect(
-                   borderRadius: BorderRadius.circular(20),
-                   child: Container(
-                     height: 350,
-                     width: MediaQuery.of(context).size.width*0.9,
-                     child: CachedNetworkImage(
-                       fit: BoxFit.fill,
-                       imageUrl: "${apiproviderF!.Datapick!.urlToImage}",
-                       placeholder: (context,_)=>Image.asset("assets/image/pexels-cottonbro-3944454.jpg"),
-                       errorWidget: (context,_,__)=>Image.asset("assets/image/pexels-cottonbro-3944454.jpg"),
+             Row(
+               mainAxisAlignment: MainAxisAlignment.center,
+               children: [
+                 Container(margin: EdgeInsets.symmetric(vertical: 20),width: MediaQuery.of(context).size.width*0.9,child: Text("${apiproviderF!.Datapick!.title}",style: TextStyle(fontSize: 15,color: Colors.orange ,fontWeight: FontWeight.bold),)),
+               ],
+             ),
+             Row(
+               mainAxisAlignment: MainAxisAlignment.center,
+               children: [
+                 InkWell(onTap: (){},
+                   child: ClipRRect(
+                     borderRadius: BorderRadius.circular(20),
+                     child: Container(
+                       height: 350,
+                       width: MediaQuery.of(context).size.width*0.9,
+                       child: CachedNetworkImage(
+                         fit: BoxFit.fill,
+                         imageUrl: "${apiproviderF!.Datapick!.urlToImage}",
+                         placeholder: (context,_)=>Image.asset("assets/image/pexels-cottonbro-3944454.jpg"),
+                         errorWidget: (context,_,__)=>Image.asset("assets/image/pexels-cottonbro-3944454.jpg"),
+                       ),
                      ),
                    ),
                  ),
+               ],
+             ),
+              SizedBox(height: 25,),
+             Container(
+               margin: EdgeInsets.symmetric(horizontal: 3),
+               decoration: BoxDecoration(
+                 color:Color(0xff363535),
+                 borderRadius: BorderRadius.only(topLeft: Radius.circular(30),topRight: Radius.circular(30)),
                ),
-             ],
-           ),
-         ],
+               height:1000,
+               width: double.infinity,
+               child: Column(
+                 children: [
+                   Padding(
+                     padding: const EdgeInsets.all(8.0),
+                     child: Container(width: MediaQuery.of(context).size.width*0.85,child: Text("${apiproviderF!.Datapick!.content}",style: TextStyle(color: Colors.white),)),
+                   ),
+                   SizedBox(height: 15,),
+                   Container(height: 1,width: double.infinity,color: Colors.white,),
+                   SizedBox(height: 8,),
+                   Row(
+                     mainAxisAlignment: MainAxisAlignment.start,
+                     children: [
+                       Padding(
+                         padding: const EdgeInsets.all(8.0),
+                         child: Text("2022-10-07TO6:55:39+00:00",style: TextStyle(color: Colors.white54),),
+                       ),
+                     ],
+                   ),
+                   SizedBox(height: 15,),
+                 ],
+               ),
+             ),
+           ],
+        ),
       ),
     ));
   }
