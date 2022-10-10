@@ -9,9 +9,16 @@ import '../model/ApiNews.dart';
 class Api_Provider extends ChangeNotifier {
 
   Articles? Datapick;
-  String newslike = "https://newsapi.org/v2/everything?q=tesla&from=${DateTime.now().year}-${DateTime.now().month}-${DateTime.now().day}&sortBy=publishedAt&apiKey=870ee857647b4b2083a6d45768f26d3a";
+  String searchdata = "apple";
 
-  Future<ApiNews> Apifactory() async {
+   void changeData(String newdata)
+   {
+     searchdata =newdata;
+     notifyListeners();
+   }
+
+  Future<ApiNews> Apifactory(String data) async {
+    String newslike = "https://newsapi.org/v2/everything?q=$data&from=${DateTime.now().year}-${DateTime.now().month}-${DateTime.now().day}&sortBy=publishedAt&apiKey=9a17bf4238e64d38867439d521c6c0fb";
     var newsString = await http.get(Uri.parse(newslike));
     var newsjson = jsonDecode(newsString.body);
     return  ApiNews.fromJson(newsjson);
