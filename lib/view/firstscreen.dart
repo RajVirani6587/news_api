@@ -1,9 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:news_api/provider/provider.dart';
 import 'package:provider/provider.dart';
 
 import '../model/ApiNews.dart';
+import '../provider/adspage.dart';
 
 class newsApi_FirstScreen extends StatefulWidget {
   const newsApi_FirstScreen({Key? key}) : super(key: key);
@@ -13,14 +15,18 @@ class newsApi_FirstScreen extends StatefulWidget {
 }
 
 class _newsApi_FirstScreenState extends State<newsApi_FirstScreen> {
+  @override
+  void initState() {
+    super.initState();
+       bannerAds();
+       interVideoAds();
+     }
 
   final blue = const Color(0xff69695f);
   final backgroundLightFont = const Color(0xFF090909);
-
-
-
   Api_Provider? apiproviderT;
   Api_Provider? apiproviderF;
+
 
   @override
   Widget build(BuildContext context) {
@@ -29,86 +35,129 @@ class _newsApi_FirstScreenState extends State<newsApi_FirstScreen> {
     return SafeArea(
         child: Scaffold(
           backgroundColor: Colors.black,
-      body: Column(
+      body: Stack(
+        alignment: Alignment.bottomCenter,
         children: [
-          SizedBox(height: 10,),
-          SizedBox(
-            height: 30,
-            child: ListView(
-              scrollDirection: Axis.horizontal,
-              children: [
-                Button("apple"),
-                Button("Google"),
-                Button("Microsoft"),
-                Button("Facebook"),
-                Button("YouTube"),
-                Button("Whatsapp"),
-                Button("Flutter"),
-                Button("android "),
-                Button("pub.dev"),
-                Button("india"),
-              ],
-            ),
-          ),
-          SizedBox(height: 20,),
+          Column(
+            children: [
+              SizedBox(height: 10,),
+              SizedBox(
+                height: 30,
+                child: ListView(
+                  scrollDirection: Axis.horizontal,
+                  children: [
+                    Button("apple"),
+                    Button("Google"),
+                    Button("Microsoft"),
+                    Button("Facebook"),
+                    Button("YouTube"),
+                    Button("Whatsapp"),
+                    Button("Flutter"),
+                    Button("android "),
+                    Button("pub.dev"),
+                    Button("india"),
+                  ],
+                ),
+              ),
+              SizedBox(height: 20,),
 
-          Expanded(
-            child: FutureBuilder<ApiNews>(
-              future: apiproviderF!.Apifactory("${apiproviderT!.searchdata}"),//
-              builder: (context, snapshot)
-              {
-                if (snapshot.hasError)
-                {
-                  return Text("${snapshot.error}");
-                } else if (snapshot.hasData)
-                {
-                  ApiNews apimodel = snapshot.data!;
-                  return ListView.builder(
-                      itemCount: apimodel.articles!.length,
-                      itemBuilder: (context, index)
-                      {
-                        return InkWell(onTap: (){
-                           apiproviderF!.Datapick = apimodel.articles![index];
-                           Navigator.pushNamed(context, 'secode');
+              Expanded(
+                child: FutureBuilder<ApiNews>(
+                  future: apiproviderF!.Apifactory("${apiproviderT!.searchdata}"),//
+                  builder: (context, snapshot)
+                  {
+                    if (snapshot.hasError)
+                    {
+                      return Text("${snapshot.error}");
+                    } else if (snapshot.hasData)
+                    {
+                      ApiNews apimodel = snapshot.data!;
+                      return ListView.builder(
+                        itemCount: apimodel.articles!.length,
+                        itemBuilder: (context, index)
+                        {
+                          return InkWell(onTap: (){
+                            if(interstitialVideoAd != null)
+                            {
+                              interstitialVideoAd!.show();
+                              interVideoAds();
+                            }
+                            apiproviderF!.Datapick = apimodel.articles![index];
+                            Navigator.pushNamed(context, 'secode');
                           },
-                          child: Column(
-                            children: [
-                              SizedBox(height: 8,),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
+                            child: Column(
+                              children: [
+                                SizedBox(height: 8,),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Column(
+                                      children: [
+                                        Container(padding: EdgeInsets.symmetric(horizontal: 8),height: 77,width: MediaQuery.of(context).size.width*0.45,child: Text("${apimodel.articles![index].title}",style: TextStyle(fontWeight:FontWeight.bold,color: Colors.white),)),
+                                        Container(padding: EdgeInsets.symmetric(horizontal: 8),height: 77,width: MediaQuery.of(context).size.width*0.45,child: Text("${apimodel.articles![index].description}",style: TextStyle(color: Colors.white60),)),
+                                      ],
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: CachedNetworkImage(
+                                        height: 140,
+                                        width: MediaQuery.of(context).size.width*0.45,
+                                        fit: BoxFit.cover,
+                                        imageUrl: "${apimodel.articles![index].urlToImage}",
+                                        placeholder: (context,_)=>Image.asset("assets/image/pexels-cottonbro-3944454.jpg"),
+                                        errorWidget: (context,_,__)=>Image.asset("assets/image/pexels-cottonbro-3944454.jpg"),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(height: 30,),
 
-                                  Column(
+                                Container(
+                                  margin: EdgeInsets.symmetric(horizontal: 12),
+                                  height: 1,
+                                  width: double.infinity,
+                                  color: Colors.white54,
+                                ),
+
+                                Container(
+                                  margin: EdgeInsets.symmetric(vertical:5 ),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                                     children: [
-                                      Container(padding: EdgeInsets.symmetric(horizontal: 8),height: 77,width: MediaQuery.of(context).size.width*0.45,child: Text("${apimodel.articles![index].title}",style: TextStyle(fontWeight:FontWeight.bold,color: Colors.white),)),
-                                      Container(padding: EdgeInsets.symmetric(horizontal: 8),height: 77,width: MediaQuery.of(context).size.width*0.45,child: Text("${apimodel.articles![index].description}",style: TextStyle(color: Colors.white60),)),
+                                      TextButton.icon(onPressed: (){}, icon: Icon(Icons.favorite_border,color: Colors.white54,), label: Text("Like",style: TextStyle(color: Colors.white54),)),
+                                      TextButton.icon(onPressed: (){}, icon: Icon(Icons.share,color: Colors.white54,), label: Text("share",style: TextStyle(color: Colors.white54,),)),
+                                      TextButton.icon(onPressed: (){}, icon: Icon(Icons.bookmark_outline,color: Colors.white54,), label: Text("save",style: TextStyle(color: Colors.white54,),)),
                                     ],
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: CachedNetworkImage(
-                                      height: 140,
-                                      width: MediaQuery.of(context).size.width*0.45,
-                                      fit: BoxFit.cover,
-                                      imageUrl: "${apimodel.articles![index].urlToImage}",
-                                      placeholder: (context,_)=>Image.asset("assets/image/pexels-cottonbro-3944454.jpg"),
-                                      errorWidget: (context,_,__)=>Image.asset("assets/image/pexels-cottonbro-3944454.jpg"),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(height: 40,)
-                            ],
-                          ),
-                        );
-                      },
-                    );
-                }
-                return Center(child: CircularProgressIndicator());
-              },
+                                ),
+                                Container(
+                                  height: 1.5,
+                                  width: double.infinity,
+                                  color: Colors.white54,
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                      );
+                    }
+                    return Center(child: CircularProgressIndicator());
+                  },
+                ),
+              ),
+            ],
+          ),
+
+          Container(
+            margin: EdgeInsets.only(bottom: 20,left: 10),
+            height:40,
+            width: double.infinity,
+            child: AdWidget(
+              ad: bannerAd!,
             ),
           ),
         ],
+
       ),
     ));
   }

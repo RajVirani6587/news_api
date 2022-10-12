@@ -187,8 +187,7 @@ class _news_apisecodeState extends State<news_apisecode> {
                   ),
                   InkWell(
                     onTap: () {
-                      Navigator.pushNamed(context, 'web',
-                          arguments: apiproviderF!.Datapick!.url);
+                      Navigator.pushNamed(context,'web',arguments: apiproviderF!.Datapick!.url);
                     },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
