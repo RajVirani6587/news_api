@@ -161,7 +161,7 @@ class _news_apisecodeState extends State<news_apisecode> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Text("${apiproviderF!.Datapick!.author}",style: TextStyle(color: Colors.orange),),
+                        Container(width: MediaQuery.of(context).size.width*0.85,child: Text("${apiproviderF!.Datapick!.author}",style: TextStyle(color: Colors.orange),)),
                       ],
                     ),
                   ),

@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:like_button/like_button.dart';
 import 'package:news_api/provider/provider.dart';
 import 'package:provider/provider.dart';
 
@@ -28,6 +29,7 @@ class _newsApi_FirstScreenState extends State<newsApi_FirstScreen> {
   Api_Provider? apiproviderF;
 
 
+
   @override
   Widget build(BuildContext context) {
     apiproviderF = Provider.of<Api_Provider>(context, listen: false);
@@ -48,7 +50,7 @@ class _newsApi_FirstScreenState extends State<newsApi_FirstScreen> {
                   children: [
                     Button("apple"),
                     Button("Google"),
-                    Button("Microsoft"),
+                    Button("TATA"),
                     Button("Facebook"),
                     Button("YouTube"),
                     Button("Whatsapp"),
@@ -124,7 +126,31 @@ class _newsApi_FirstScreenState extends State<newsApi_FirstScreen> {
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                                     children: [
-                                      TextButton.icon(onPressed: (){}, icon: Icon(Icons.favorite_border,color: Colors.white54,), label: Text("Like",style: TextStyle(color: Colors.white54),)),
+                                  LikeButton(
+                                    // onTap: (isLiked) async{
+                                    //  //apiproviderF!.cart.add(ApiNews.fromJson(ApiNews));
+                                    // }
+                                        size: 30,
+                                        circleColor: CircleColor(start: Colors.pinkAccent, end: Colors.redAccent),
+                                        bubblesColor: BubblesColor(
+                                          dotPrimaryColor: Color(0xff33b5e5),
+                                          dotSecondaryColor: Color(0xff0099cc),
+                                        ),
+                                        likeBuilder: (bool isLiked) {
+                                          return Column(
+                                            children: [
+                                              Icon(
+                                                isLiked?Icons.favorite:Icons.favorite_border,
+                                                color: isLiked? Colors.red : Colors.white54,
+                                                size: 30,
+
+                                              ),
+                                            ],
+                                          );
+                                        },
+                                        likeCount: 665,
+                                      ),
+
                                       TextButton.icon(onPressed: (){}, icon: Icon(Icons.share,color: Colors.white54,), label: Text("share",style: TextStyle(color: Colors.white54,),)),
                                       TextButton.icon(onPressed: (){}, icon: Icon(Icons.bookmark_outline,color: Colors.white54,), label: Text("save",style: TextStyle(color: Colors.white54,),)),
                                     ],
