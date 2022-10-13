@@ -19,16 +19,14 @@ class _newsApi_FirstScreenState extends State<newsApi_FirstScreen> {
   @override
   void initState() {
     super.initState();
-       bannerAds();
-       interVideoAds();
-     }
+    bannerAds();
+    interVideoAds();
+  }
 
   final blue = const Color(0xff69695f);
   final backgroundLightFont = const Color(0xFF090909);
   Api_Provider? apiproviderT;
   Api_Provider? apiproviderF;
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -36,13 +34,15 @@ class _newsApi_FirstScreenState extends State<newsApi_FirstScreen> {
     apiproviderT = Provider.of<Api_Provider>(context, listen: true);
     return SafeArea(
         child: Scaffold(
-          backgroundColor: Colors.black,
+      backgroundColor: Colors.black,
       body: Stack(
         alignment: Alignment.bottomCenter,
         children: [
           Column(
             children: [
-              SizedBox(height: 10,),
+              SizedBox(
+                height: 10,
+              ),
               SizedBox(
                 height: 30,
                 child: ListView(
@@ -61,98 +61,152 @@ class _newsApi_FirstScreenState extends State<newsApi_FirstScreen> {
                   ],
                 ),
               ),
-              SizedBox(height: 20,),
-
+              SizedBox(
+                height: 20,
+              ),
               Expanded(
                 child: FutureBuilder<ApiNews>(
-                  future: apiproviderF!.Apifactory("${apiproviderT!.searchdata}"),//
-                  builder: (context, snapshot)
-                  {
-                    if (snapshot.hasError)
-                    {
+                  future: apiproviderF!
+                      .Apifactory("${apiproviderT!.searchdata}"), //
+                  builder: (context, snapshot) {
+                    if (snapshot.hasError) {
                       return Text("${snapshot.error}");
-                    } else if (snapshot.hasData)
-                    {
+                    } else if (snapshot.hasData) {
                       ApiNews apimodel = snapshot.data!;
                       return ListView.builder(
                         itemCount: apimodel.articles!.length,
-                        itemBuilder: (context, index)
-                        {
-                          return InkWell(onTap: (){
-                            if(interstitialVideoAd != null)
-                            {
-                              interstitialVideoAd!.show();
-                              interVideoAds();
-                            }
-                            apiproviderF!.Datapick = apimodel.articles![index];
-                            Navigator.pushNamed(context, 'secode');
-                          },
+                        itemBuilder: (context, index) {
+                          return InkWell(
+                            onTap: () {
+                              if (interstitialVideoAd != null) {
+                                interstitialVideoAd!.show();
+                                interVideoAds();
+                              }
+                              apiproviderF!.Datapick =
+                                  apimodel.articles![index];
+                              Navigator.pushNamed(context, 'secode');
+                            },
                             child: Column(
                               children: [
-                                SizedBox(height: 8,),
+                                SizedBox(
+                                  height: 8,
+                                ),
                                 Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Column(
                                       children: [
-                                        Container(padding: EdgeInsets.symmetric(horizontal: 8),height: 77,width: MediaQuery.of(context).size.width*0.45,child: Text("${apimodel.articles![index].title}",style: TextStyle(fontWeight:FontWeight.bold,color: Colors.white),)),
-                                        Container(padding: EdgeInsets.symmetric(horizontal: 8),height: 77,width: MediaQuery.of(context).size.width*0.45,child: Text("${apimodel.articles![index].description}",style: TextStyle(color: Colors.white60),)),
+                                        Container(
+                                            padding: EdgeInsets.symmetric(
+                                                horizontal: 8),
+                                            height: 77,
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                0.45,
+                                            child: Text(
+                                              "${apimodel.articles![index].title}",
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  color: Colors.white),
+                                            )),
+                                        Container(
+                                            padding: EdgeInsets.symmetric(
+                                                horizontal: 8),
+                                            height: 77,
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                0.45,
+                                            child: Text(
+                                              "${apimodel.articles![index].description}",
+                                              style: TextStyle(
+                                                  color: Colors.white60),
+                                            )),
                                       ],
                                     ),
                                     Padding(
                                       padding: const EdgeInsets.all(8.0),
                                       child: CachedNetworkImage(
                                         height: 140,
-                                        width: MediaQuery.of(context).size.width*0.45,
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.45,
                                         fit: BoxFit.cover,
-                                        imageUrl: "${apimodel.articles![index].urlToImage}",
-                                        placeholder: (context,_)=>Image.asset("assets/image/pexels-cottonbro-3944454.jpg"),
-                                        errorWidget: (context,_,__)=>Image.asset("assets/image/pexels-cottonbro-3944454.jpg"),
+                                        imageUrl:
+                                            "${apimodel.articles![index].urlToImage}",
+                                        placeholder: (context, _) => Image.asset(
+                                            "assets/image/pexels-cottonbro-3944454.jpg"),
+                                        errorWidget: (context, _, __) =>
+                                            Image.asset(
+                                                "assets/image/pexels-cottonbro-3944454.jpg"),
                                       ),
                                     ),
                                   ],
                                 ),
-                                SizedBox(height: 30,),
-
+                                SizedBox(
+                                  height: 30,
+                                ),
                                 Container(
                                   margin: EdgeInsets.symmetric(horizontal: 12),
                                   height: 1,
                                   width: double.infinity,
                                   color: Colors.white54,
                                 ),
-
                                 Container(
-                                  margin: EdgeInsets.symmetric(vertical:5 ),
+                                  margin: EdgeInsets.symmetric(vertical: 5),
                                   child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
                                     children: [
-                                  LikeButton(
-                                    // onTap: (isLiked) async{
-                                    //  //apiproviderF!.cart.add(ApiNews.fromJson(ApiNews));
-                                    // }
+                                      LikeButton(
                                         size: 30,
-                                        circleColor: CircleColor(start: Colors.pinkAccent, end: Colors.redAccent),
+                                        circleColor: CircleColor(
+                                            start: Colors.pinkAccent,
+                                            end: Colors.redAccent),
                                         bubblesColor: BubblesColor(
                                           dotPrimaryColor: Color(0xff33b5e5),
                                           dotSecondaryColor: Color(0xff0099cc),
                                         ),
                                         likeBuilder: (bool isLiked) {
-                                          return Column(
-                                            children: [
-                                              Icon(
-                                                isLiked?Icons.favorite:Icons.favorite_border,
-                                                color: isLiked? Colors.red : Colors.white54,
-                                                size: 30,
-
-                                              ),
-                                            ],
+                                          apiproviderF!.cart.add(apimodel.articles![index]);
+                                          return Icon(
+                                            isLiked
+                                                ? Icons.favorite
+                                                : Icons.favorite_border,
+                                            color: isLiked
+                                                ? Colors.red
+                                                : Colors.white54,
+                                            size: 30,
                                           );
                                         },
-                                        likeCount: 665,
+                                        likeCount: 605,
                                       ),
-
-                                      TextButton.icon(onPressed: (){}, icon: Icon(Icons.share,color: Colors.white54,), label: Text("share",style: TextStyle(color: Colors.white54,),)),
-                                      TextButton.icon(onPressed: (){}, icon: Icon(Icons.bookmark_outline,color: Colors.white54,), label: Text("save",style: TextStyle(color: Colors.white54,),)),
+                                      TextButton.icon(
+                                          onPressed: () {},
+                                          icon: Icon(
+                                            Icons.share,
+                                            color: Colors.white54,
+                                          ),
+                                          label: Text(
+                                            "share",
+                                            style: TextStyle(
+                                              color: Colors.white54,
+                                            ),
+                                          )),
+                                      TextButton.icon(
+                                          onPressed: () {},
+                                          icon: Icon(
+                                            Icons.bookmark_outline,
+                                            color: Colors.white54,
+                                          ),
+                                          label: Text(
+                                            "save",
+                                            style: TextStyle(
+                                              color: Colors.white54,
+                                            ),
+                                          )),
                                     ],
                                   ),
                                 ),
@@ -173,36 +227,36 @@ class _newsApi_FirstScreenState extends State<newsApi_FirstScreen> {
               ),
             ],
           ),
-
           Container(
-            margin: EdgeInsets.only(bottom: 20,left: 10),
-            height:40,
+            margin: EdgeInsets.only(bottom: 20, left: 10),
+            height: 40,
             width: double.infinity,
             child: AdWidget(
               ad: bannerAd!,
             ),
           ),
         ],
-
       ),
     ));
   }
 
-  Widget Button(String text)
-  {
-    return InkWell(onTap: (){
-      apiproviderF!.changeData(text);
-    },
+  Widget Button(String text) {
+    return InkWell(
+      onTap: () {
+        apiproviderF!.changeData(text);
+      },
       child: Container(
         height: 30,
         width: 80,
         margin: EdgeInsets.symmetric(horizontal: 5),
         alignment: Alignment.center,
-        child: Text("$text",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
+        child: Text(
+          "$text",
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+        ),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(30),
           color: text == apiproviderF!.searchdata ? blue : backgroundLightFont,
-
         ),
       ),
     );

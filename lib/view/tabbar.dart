@@ -25,7 +25,25 @@ class _api_tabbarState extends State<api_tabbar> {
                  centerTitle: false,
                  title: Text("Daily 24/7 News"),
                  actions: [
-                   Icon(Icons.more_vert)
+                   PopupMenuButton(itemBuilder: (context){
+                     return [
+                       PopupMenuItem(onTap: (){
+                         print('hello');
+
+                         Navigator.pushNamed(context,'like');
+
+                       },child: Text("Like")),
+                       PopupMenuItem(onTap:(){
+
+                         print('hello');
+
+                         Navigator.pushNamed(context,'save');
+
+                       },child: Text("Save")),
+                     ];
+                    },icon: Icon(Icons.more_vert),
+                    ),
+
                  ],
                  bottom:TabBar(
                    isScrollable: true,

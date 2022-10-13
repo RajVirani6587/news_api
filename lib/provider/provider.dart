@@ -11,7 +11,7 @@ class Api_Provider extends ChangeNotifier {
   Articles? Datapick;
   String searchdata = "apple";
 
-  List<ApiNews>cart = [];
+  List<Articles>cart = [];
 
 
   void  remove(int index) {
@@ -19,16 +19,14 @@ class Api_Provider extends ChangeNotifier {
     notifyListeners();
   }
 
-
-
-   void changeData(String newdata)
+  void changeData(String newdata)
    {
      searchdata =newdata;
      notifyListeners();
    }
 
   Future<ApiNews> Apifactory(String data) async {
-    String newslike = "https://newsapi.org/v2/everything?q=$data&from=${DateTime.now().year}-${DateTime.now().month}-${DateTime.now().day}&sortBy=publishedAt&apiKey=9a17bf4238e64d38867439d521c6c0fb";
+    String newslike = "https://newsapi.org/v2/everything?q=$data&from=${DateTime.now().year}-${DateTime.now().month}-${DateTime.now().day}&sortBy=publishedAt&apiKey=27d78a2672154d95bb90dfca50447eac";
     var newsString = await http.get(Uri.parse(newslike));
     var newsjson = jsonDecode(newsString.body);
     return  ApiNews.fromJson(newsjson);
