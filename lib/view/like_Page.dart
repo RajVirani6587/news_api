@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:news_api/provider/provider.dart';
 import 'package:provider/provider.dart';
@@ -16,6 +17,7 @@ class _Like_PageState extends State<Like_Page> {
   Widget build(BuildContext context) {
     cartProviderF = Provider.of<Api_Provider>(context, listen: false);
     cartProviderT = Provider.of<Api_Provider>(context, listen: true);
+
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -31,10 +33,24 @@ class _Like_PageState extends State<Like_Page> {
             ),
             Expanded(
               child: ListView.builder(
-                  itemCount: cartProviderF!.cart.length,
+                  itemCount: cartProviderT!.cart.length,
                   itemBuilder:(context,index){
                     return Column(
                       children: [
+                        Text("${cartProviderT!.cart[index].title}"),
+                         Center(
+                          child: CachedNetworkImage(
+                            height: 140,
+                            width: MediaQuery.of(context).size.width * 0.45,
+                            fit: BoxFit.cover,
+                            imageUrl: "${cartProviderT!.cart[index].urlToImage}",
+                            placeholder: (context, _) => Image.asset(
+                                "assets/image/pexels-cottonbro-3944454.jpg"),
+                            errorWidget: (context, _, __) =>
+                                Image.asset(
+                                    "assets/image/pexels-cottonbro-3944454.jpg"),
+                          ),
+                        ),
                         ],
                     );
                   },

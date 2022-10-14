@@ -1,6 +1,9 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:news_api/model/ApiNews.dart';
+import 'package:news_api/provider/provider.dart';
+import 'package:provider/provider.dart';
 
 import 'firstscreen.dart';
 
@@ -12,7 +15,7 @@ class api_tabbar extends StatefulWidget {
 }
 
 class _api_tabbarState extends State<api_tabbar> {
-
+  ApiNews?apimodel;
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -27,20 +30,15 @@ class _api_tabbarState extends State<api_tabbar> {
                  actions: [
                    PopupMenuButton(itemBuilder: (context){
                      return [
-                       PopupMenuItem(onTap: (){
-                         print('hello');
-
+                       PopupMenuItem(child: InkWell(onTap: (){
                          Navigator.pushNamed(context,'like');
+                       },child: Text("Like"))),
 
-                       },child: Text("Like")),
-                       PopupMenuItem(onTap:(){
-
-                         print('hello');
-
+                       PopupMenuItem(child: InkWell(onTap: (){
                          Navigator.pushNamed(context,'save');
+                       },child: Text("Save"))),
 
-                       },child: Text("Save")),
-                     ];
+                      ];
                     },icon: Icon(Icons.more_vert),
                     ),
 
