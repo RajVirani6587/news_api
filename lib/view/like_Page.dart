@@ -21,6 +21,10 @@ class _Like_PageState extends State<Like_Page> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
+          leading: IconButton(onPressed: (){
+            Navigator.pop(context);
+          }, icon:Icon(Icons.arrow_back)),
+          centerTitle: true,
           title: Text("Like"),
         ),
         body: Column(
@@ -37,20 +41,50 @@ class _Like_PageState extends State<Like_Page> {
                   itemBuilder:(context,index){
                     return Column(
                       children: [
-                        Text("${cartProviderT!.cart[index].title}"),
-                         Center(
-                          child: CachedNetworkImage(
-                            height: 140,
-                            width: MediaQuery.of(context).size.width * 0.45,
-                            fit: BoxFit.cover,
-                            imageUrl: "${cartProviderT!.cart[index].urlToImage}",
-                            placeholder: (context, _) => Image.asset(
-                                "assets/image/pexels-cottonbro-3944454.jpg"),
-                            errorWidget: (context, _, __) =>
-                                Image.asset(
-                                    "assets/image/pexels-cottonbro-3944454.jpg"),
+                        Container(
+                          margin: EdgeInsets.all(15),
+                          height: 400,
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            color: Color(0xff363535),
                           ),
-                        ),
+                          child: Column(
+                            children: [
+                            ClipRRect(
+                              borderRadius:BorderRadius.circular(20),
+                                child: CachedNetworkImage(
+                                     height: 175,
+                                     width: double.infinity,
+                                      fit: BoxFit.cover,
+                                      imageUrl: "${cartProviderT!.cart[index].urlToImage}",
+                                           placeholder: (context, _) => Image.asset(
+                                              "assets/image/pexels-markus-spiske-97050.jpg"),
+                                           errorWidget: (context, _, __) =>
+                                                 Image.asset(
+                                                  "assets/image/pexels-markus-spiske-97050.jpg"),
+                                     ),
+                                  ),
+                            ],
+                          ),
+
+
+                        )
+
+                        // Text("${cartProviderT!.cart[index].title}"),
+                        //  Center(
+                        //   child: CachedNetworkImage(
+                        //     height: 140,
+                        //     width: MediaQuery.of(context).size.width * 0.45,
+                        //     fit: BoxFit.cover,
+                        //     imageUrl: "${cartProviderT!.cart[index].urlToImage}",
+                        //     placeholder: (context, _) => Image.asset(
+                        //         "assets/image/pexels-cottonbro-3944454.jpg"),
+                        //     errorWidget: (context, _, __) =>
+                        //         Image.asset(
+                        //             "assets/image/pexels-cottonbro-3944454.jpg"),
+                        //   ),
+                        // ),
                         ],
                     );
                   },

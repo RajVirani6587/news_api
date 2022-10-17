@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:news_api/model/ApiNews.dart';
 import 'package:provider/provider.dart';
 
-import '../provider/provider.dart';
+import '../../provider/provider.dart';
 
 class news_apisecode extends StatefulWidget {
   const news_apisecode({Key? key}) : super(key: key);
@@ -78,9 +78,9 @@ class _news_apisecodeState extends State<news_apisecode> {
                         fit: BoxFit.fill,
                         imageUrl: "${apiproviderF!.Datapick!.urlToImage}",
                         placeholder: (context, _) => Image.asset(
-                            "assets/image/pexels-cottonbro-3944454.jpg"),
+                            "assets/image/pexels-markus-spiske-97050.jpg"),
                         errorWidget: (context, _, __) => Image.asset(
-                            "assets/image/pexels-cottonbro-3944454.jpg"),
+                            "assets/image/pexels-markus-spiske-97050.jpg"),
                       ),
                     ),
                   ),

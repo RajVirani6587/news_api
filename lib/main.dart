@@ -4,12 +4,12 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:news_api/provider/newsbottomprovider.dart';
 import 'package:news_api/provider/provider.dart';
 import 'package:news_api/view/bottombar.dart';
-import 'package:news_api/view/firstscreen.dart';
+import 'package:news_api/view/topnews/firstscreen.dart';
 import 'package:news_api/view/like_Page.dart';
 import 'package:news_api/view/save_Page.dart';
-import 'package:news_api/view/secnews_Screen.dart';
+import 'package:news_api/view/topnews/secnews_Screen.dart';
 import 'package:news_api/view/tabbar.dart';
-import 'package:news_api/view/webviewScreen.dart';
+import 'package:news_api/view/topnews/webviewScreen.dart';
 import 'package:provider/provider.dart';
 
 void main(){

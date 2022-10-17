@@ -5,8 +5,8 @@ import 'package:like_button/like_button.dart';
 import 'package:news_api/provider/provider.dart';
 import 'package:provider/provider.dart';
 
-import '../model/ApiNews.dart';
-import '../provider/adspage.dart';
+import '../../model/ApiNews.dart';
+import '../../provider/adspage.dart';
 
 class newsApi_FirstScreen extends StatefulWidget {
   const newsApi_FirstScreen({Key? key}) : super(key: key);
@@ -48,6 +48,7 @@ class _newsApi_FirstScreenState extends State<newsApi_FirstScreen> {
                 child: ListView(
                   scrollDirection: Axis.horizontal,
                   children: [
+                    Button("news"),
                     Button("apple"),
                     Button("Google"),
                     Button("TATA"),
@@ -130,17 +131,15 @@ class _newsApi_FirstScreenState extends State<newsApi_FirstScreen> {
                                       padding: const EdgeInsets.all(8.0),
                                       child: CachedNetworkImage(
                                         height: 140,
-                                        width:
-                                            MediaQuery.of(context).size.width *
-                                                0.45,
+                                        width: MediaQuery.of(context).size.width * 0.45,
                                         fit: BoxFit.cover,
                                         imageUrl:
                                             "${apimodel.articles![index].urlToImage}",
                                         placeholder: (context, _) => Image.asset(
-                                            "assets/image/pexels-cottonbro-3944454.jpg"),
+                                            "assets/image/pexels-markus-spiske-97050.jpg"),
                                         errorWidget: (context, _, __) =>
                                             Image.asset(
-                                                "assets/image/pexels-cottonbro-3944454.jpg"),
+                                                "assets/image/pexels-markus-spiske-97050.jpg"),
                                       ),
                                     ),
                                   ],

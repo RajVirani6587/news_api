@@ -5,7 +5,7 @@ import 'package:news_api/model/ApiNews.dart';
 import 'package:news_api/provider/provider.dart';
 import 'package:provider/provider.dart';
 
-import 'firstscreen.dart';
+import 'topnews/firstscreen.dart';
 
 class api_tabbar extends StatefulWidget {
   const api_tabbar({Key? key}) : super(key: key);

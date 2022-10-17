@@ -9,7 +9,7 @@ import '../model/ApiNews.dart';
 class Api_Provider extends ChangeNotifier {
 
   Articles? Datapick;
-  String searchdata = "apple";
+  String searchdata ="news";
 
   List<Articles>cart = [];
 
