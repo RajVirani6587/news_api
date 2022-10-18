@@ -169,8 +169,9 @@ class _newsApi_FirstScreenState extends State<newsApi_FirstScreen> {
                                           dotSecondaryColor: Color(0xff0099cc),
                                         ),
                                         likeBuilder: (bool isLiked) {
-                                          apiproviderF!.cart.add(apimodel.articles![index]);
-                                          return Icon(
+                                           isLiked ? apiproviderF!.cart.add(apimodel.articles![index]):"";
+
+                                           return Icon(
                                             isLiked
                                                 ? Icons.favorite
                                                 : Icons.favorite_border,

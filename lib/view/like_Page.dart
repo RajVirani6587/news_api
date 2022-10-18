@@ -17,10 +17,11 @@ class _Like_PageState extends State<Like_Page> {
   Widget build(BuildContext context) {
     cartProviderF = Provider.of<Api_Provider>(context, listen: false);
     cartProviderT = Provider.of<Api_Provider>(context, listen: true);
-
     return SafeArea(
       child: Scaffold(
+        backgroundColor: Colors.black,
         appBar: AppBar(
+          backgroundColor:Color(0xff363535),
           leading: IconButton(onPressed: (){
             Navigator.pop(context);
           }, icon:Icon(Icons.arrow_back)),
@@ -32,7 +33,7 @@ class _Like_PageState extends State<Like_Page> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text("Hear is all posts that you liked"),
+                Text("Hear is all posts that you liked",style: TextStyle(color: Colors.white),),
               ],
             ),
             Expanded(
@@ -65,31 +66,18 @@ class _Like_PageState extends State<Like_Page> {
                                                   "assets/image/pexels-markus-spiske-97050.jpg"),
                                      ),
                                   ),
+                              SizedBox(height: 10,),
+                              Container(margin: EdgeInsets.all(8),
+                                  width: MediaQuery.of(context).size.width*0.9,
+                                  child: Text("${cartProviderT!.cart[index].title}",style: TextStyle(color: Colors.white),)),
                             ],
                           ),
-
-
-                        )
-
-                        // Text("${cartProviderT!.cart[index].title}"),
-                        //  Center(
-                        //   child: CachedNetworkImage(
-                        //     height: 140,
-                        //     width: MediaQuery.of(context).size.width * 0.45,
-                        //     fit: BoxFit.cover,
-                        //     imageUrl: "${cartProviderT!.cart[index].urlToImage}",
-                        //     placeholder: (context, _) => Image.asset(
-                        //         "assets/image/pexels-cottonbro-3944454.jpg"),
-                        //     errorWidget: (context, _, __) =>
-                        //         Image.asset(
-                        //             "assets/image/pexels-cottonbro-3944454.jpg"),
-                        //   ),
-                        // ),
-                        ],
+                        ),
+                      ],
                     );
                   },
-              ),
-            ),
+                ),
+             ),
           ],
         ),
       ),
