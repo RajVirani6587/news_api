@@ -67,8 +67,7 @@ class _newsApi_FirstScreenState extends State<newsApi_FirstScreen> {
               ),
               Expanded(
                 child: FutureBuilder<ApiNews>(
-                  future: apiproviderF!
-                      .Apifactory("${apiproviderT!.searchdata}"), //
+                  future: apiproviderF!.Apifactory(apiproviderT!.searchdata), //
                   builder: (context, snapshot) {
                     if (snapshot.hasError) {
                       return Text("${snapshot.error}");
@@ -89,7 +88,7 @@ class _newsApi_FirstScreenState extends State<newsApi_FirstScreen> {
                             },
                             child: Column(
                               children: [
-                                SizedBox(
+                                const SizedBox(
                                   height: 8,
                                 ),
                                 Row(
@@ -131,7 +130,9 @@ class _newsApi_FirstScreenState extends State<newsApi_FirstScreen> {
                                       padding: const EdgeInsets.all(8.0),
                                       child: CachedNetworkImage(
                                         height: 140,
-                                        width: MediaQuery.of(context).size.width * 0.45,
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.45,
                                         fit: BoxFit.cover,
                                         imageUrl:
                                             "${apimodel.articles![index].urlToImage}",
@@ -169,9 +170,12 @@ class _newsApi_FirstScreenState extends State<newsApi_FirstScreen> {
                                           dotSecondaryColor: Color(0xff0099cc),
                                         ),
                                         likeBuilder: (bool isLiked) {
-                                           isLiked ? apiproviderF!.cart.add(apimodel.articles![index]):"";
+                                          isLiked
+                                              ? apiproviderF!.cart.add(
+                                                  apimodel.articles![index])
+                                              : "";
 
-                                           return Icon(
+                                          return Icon(
                                             isLiked
                                                 ? Icons.favorite
                                                 : Icons.favorite_border,
